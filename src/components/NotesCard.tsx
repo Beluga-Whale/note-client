@@ -22,6 +22,7 @@ const NotesCard = ({ note }: NotesCardProps) => {
         </Typography>
       </CardContent>
       <CardActions sx={{ bgcolor: "#FDE069" }}>
+        {note.createdAt < note.updatedAt ? "CreatedAt : " : "Updated : "}{" "}
         {dayjs(note.createdAt).format("DD/MM/YYYY  HH:MM:ss ")}
       </CardActions>
     </Card>
