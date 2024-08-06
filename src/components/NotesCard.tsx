@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import dayjs from "dayjs";
 
 interface NotesCardProps {
   note: NoteModel;
@@ -20,7 +21,9 @@ const NotesCard = ({ note }: NotesCardProps) => {
           {note.text}
         </Typography>
       </CardContent>
-      <CardActions>{note.createdAt}</CardActions>
+      <CardActions sx={{ bgcolor: "#FDE069" }}>
+        {dayjs(note.createdAt).format("DD/MM/YYYY  HH:MM:ss ")}
+      </CardActions>
     </Card>
   );
 };
