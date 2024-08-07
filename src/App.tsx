@@ -3,7 +3,9 @@ import { Note as NoteModel } from "./models/note";
 import NotesCard from "./components/NotesCard";
 import api from "./api";
 import Grid from "@mui/material/Grid";
+import EditNoteDialog from "./components/EditNoteDialog";
 import AddNoteDialog from "./components/AddNoteDialog";
+import { Box } from "@mui/material";
 
 const App = () => {
   const [notes, setNotes] = useState<NoteModel[]>([]);
@@ -22,14 +24,21 @@ const App = () => {
   }, []);
 
   return (
-    <Grid container spacing={2} p={3}>
-      {notes.map((note) => (
-        <Grid item xs={12} sm={6} md={4} key={note._id}>
-          <NotesCard note={note} />
+    <Box>
+      <Grid container p={3}>
+        <Grid item>
+          <AddNoteDialog onNoteAdded={fetchNotes} />
         </Grid>
-      ))}
-      <AddNoteDialog />
-    </Grid>
+      </Grid>
+      <Grid container spacing={2} p={3}>
+        {notes.map((note) => (
+          <Grid item xs={12} sm={6} md={4} key={note._id}>
+            <NotesCard note={note} />
+          </Grid>
+        ))}
+        <EditNoteDialog />
+      </Grid>
+    </Box>
   );
 };
 
