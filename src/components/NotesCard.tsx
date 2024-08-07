@@ -41,7 +41,7 @@ const NotesCard = ({ note }: NotesCardProps) => {
         </Button>
       </CardContent>
       <CardActions sx={{ bgcolor: "#FDE069" }}>
-        {note.createdAt < note.updatedAt ? "CreatedAt : " : "Updated : "}{" "}
+        {note.createdAt < note.updatedAt ? "Updated : " : "CreatedAt : "}{" "}
         {dayjs(note.createdAt).format("DD/MM/YYYY  HH:MM:ss ")}
       </CardActions>
     </Card>

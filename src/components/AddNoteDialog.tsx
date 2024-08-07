@@ -38,7 +38,7 @@ const AddNoteDialog = ({ onNoteAdded }: AddNoteDialogProps) => {
   return (
     <>
       <Button variant="contained" onClick={handleClickOpen}>
-        Add Dialog
+        Add new note
       </Button>
       <Dialog
         open={open}

@@ -11,7 +11,11 @@ import { RootState } from "../redux/store";
 import { setDefaultNote, setToggleDialog } from "../redux/features/noteSlice";
 import api from "../api";
 
-const EditNoteDialog = () => {
+interface EditNoteDialogProps {
+  onNoteAdded: () => void;
+}
+
+const EditNoteDialog = ({ onNoteAdded }: EditNoteDialogProps) => {
   const dispatch = useDispatch();
   const toggle = useSelector((state: RootState) => state.note.toggleDialogEdit);
   const noteRedux = useSelector((state: RootState) => state.note.note);
@@ -43,7 +47,7 @@ const EditNoteDialog = () => {
       title,
       text,
     });
-
+    onNoteAdded();
     handleClose();
   };
   return (

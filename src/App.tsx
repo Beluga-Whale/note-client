@@ -36,7 +36,7 @@ const App = () => {
             <NotesCard note={note} />
           </Grid>
         ))}
-        <EditNoteDialog />
+        <EditNoteDialog onNoteAdded={fetchNotes} />
       </Grid>
     </Box>
   );
