@@ -7,18 +7,48 @@ import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
 import { setToggleDialog, setUpNote } from "../redux/features/noteSlice";
-
+import Swal from "sweetalert2";
+import api from "../api";
 interface NotesCardProps {
   note: NoteModel;
+  onNoteAdded: () => void;
 }
 
-const NotesCard = ({ note }: NotesCardProps) => {
+const NotesCard = ({ note, onNoteAdded }: NotesCardProps) => {
   const dispatch = useDispatch();
   // const noteRedux = useSelector((state: RootState) => state.note);
 
   const handleClick = (noteData: NoteModel) => {
     dispatch(setUpNote(noteData));
     dispatch(setToggleDialog(true));
+  };
+
+  const handleDelete = (noteData: NoteModel) => {
+    Swal.fire({
+      title: `Delete : ${noteData?.title}`,
+      text: ``,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        api.delete(`api/notes/${note._id}`).then((res) => {
+          if (res.status == 200) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            }).then((res) => {
+              if (res.isConfirmed) {
+                onNoteAdded();
+              }
+            });
+          }
+        });
+      }
+    });
   };
 
   return (
@@ -36,7 +66,7 @@ const NotesCard = ({ note }: NotesCardProps) => {
         <Button variant="text" onClick={() => handleClick(note)}>
           Edit
         </Button>
-        <Button variant="text" color="error" onClick={() => handleClick(note)}>
+        <Button variant="text" color="error" onClick={() => handleDelete(note)}>
           Delete
         </Button>
       </CardContent>

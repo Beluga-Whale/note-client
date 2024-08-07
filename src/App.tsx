@@ -33,7 +33,7 @@ const App = () => {
       <Grid container spacing={2} p={3}>
         {notes.map((note) => (
           <Grid item xs={12} sm={6} md={4} key={note._id}>
-            <NotesCard note={note} />
+            <NotesCard note={note} onNoteAdded={fetchNotes} />
           </Grid>
         ))}
         <EditNoteDialog onNoteAdded={fetchNotes} />
