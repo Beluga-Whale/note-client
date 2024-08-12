@@ -73,7 +73,7 @@ const AddNoteDialog = ({ onNoteAdded }: AddNoteDialogProps) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Update</Button>
+          <Button type="submit">Create</Button>
         </DialogActions>
       </Dialog>
     </>
